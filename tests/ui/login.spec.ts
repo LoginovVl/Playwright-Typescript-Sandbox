@@ -43,4 +43,11 @@ test.describe('Login Functionality', () => {
         // Assertion 2: Verify the exact text of the error message to ensure it's the expected error.
         await expect(loginPage.errorMessage).toContainText('Sorry, this user has been locked out.');
     });
+
+    // Visual Regression Test
+    test('login page visual regression', async ({ loginPage, page }) => {
+        // Visual tests check if the page looks pixels-perfect matches the snapshot.
+        // The first time this runs, it will fail and tell you to run with --update-snapshots to create the baseline.
+        await expect(page).toHaveScreenshot('login-page.png');
+    });
 });
