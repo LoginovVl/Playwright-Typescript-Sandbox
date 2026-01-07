@@ -4,25 +4,31 @@ import users from '../test-data/login-users.json';
 // We must ignore the global auth state for login tests
 test.use({ storageState: { cookies: [], origins: [] } });
 
+/* eslint-disable playwright/no-conditional-in-test, playwright/no-conditional-expect */
 test.describe('Data-Driven Login Tests', () => {
-    // Iterate over each user object in the JSON file
-    for (const user of users) {
+  // Filter users for valid and invalid scenarios
+  const validUsers = users.filter((u) => u.isValid);
+  const invalidUsers = users.filter((u) => !u.isValid);
 
-        // Create a unique test name for each data entry
-        test(`should handle login for user: ${user.username}`, async ({ loginPage, inventoryPage }) => {
-            await loginPage.navigate('/');
-            await loginPage.login(user.username, user.password);
+  for (const user of validUsers) {
+    test(`should login successfully for user: ${user.username}`, async ({
+      loginPage,
+      inventoryPage,
+    }) => {
+      await loginPage.navigate('/');
+      await loginPage.login(user.username, user.password);
+      await expect(inventoryPage.page).toHaveURL(/.*inventory.html/);
+    });
+  }
 
-            if (user.isValid) {
-                // If valid, expect successful redirect
-                await expect(inventoryPage.page).toHaveURL(/.*inventory.html/);
-            } else {
-                // If invalid, expect error message
-                await expect(loginPage.errorMessage).toBeVisible();
-                if (user.expectedError) {
-                    await expect(loginPage.errorMessage).toContainText(user.expectedError);
-                }
-            }
-        });
-    }
+  for (const user of invalidUsers) {
+    test(`should show error for user: ${user.username}`, async ({ loginPage }) => {
+      await loginPage.navigate('/');
+      await loginPage.login(user.username, user.password);
+      await expect(loginPage.errorMessage).toBeVisible();
+      if (user.expectedError) {
+        await expect(loginPage.errorMessage).toContainText(user.expectedError);
+      }
+    });
+  }
 });

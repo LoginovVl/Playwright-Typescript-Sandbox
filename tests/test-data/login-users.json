@@ -1,26 +1,26 @@
 [
-    {
-        "username": "standard_user",
-        "password": "secret_sauce",
-        "expectedError": null,
-        "isValid": true
-    },
-    {
-        "username": "locked_out_user",
-        "password": "secret_sauce",
-        "expectedError": "Sorry, this user has been locked out.",
-        "isValid": false
-    },
-    {
-        "username": "problem_user",
-        "password": "secret_sauce",
-        "expectedError": null,
-        "isValid": true
-    },
-    {
-        "username": "invalid_user",
-        "password": "wrong_password",
-        "expectedError": "Username and password do not match",
-        "isValid": false
-    }
+  {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "expectedError": null,
+    "isValid": true
+  },
+  {
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "expectedError": "Sorry, this user has been locked out.",
+    "isValid": false
+  },
+  {
+    "username": "problem_user",
+    "password": "secret_sauce",
+    "expectedError": null,
+    "isValid": true
+  },
+  {
+    "username": "invalid_user",
+    "password": "wrong_password",
+    "expectedError": "Username and password do not match",
+    "isValid": false
+  }
 ]
