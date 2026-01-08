@@ -1,4 +1,4 @@
-import { test, expect } from '../../fixtures/pomFixture';
+import { test, expect } from '@fixtures/pomFixture';
 
 test.describe('Users API (JSONPlaceholder)', () => {
   test('should get list of users', async ({ apiClient }) => {

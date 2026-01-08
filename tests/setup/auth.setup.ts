@@ -1,4 +1,4 @@
-import { test as setup, expect } from '../../fixtures/pomFixture';
+import { test as setup, expect } from '@fixtures/pomFixture';
 import path from 'path';
 
 // Define the path where the authentication state (cookies, local storage) will be saved.

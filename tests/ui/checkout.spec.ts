@@ -1,5 +1,5 @@
 // Import 'test' and 'expect' from our custom fixture.
-import { test, expect } from '../../fixtures/pomFixture';
+import { test, expect } from '@fixtures/pomFixture';
 
 // Grouping the checkout flow tests.
 test.describe('E2E Checkout Flow', () => {

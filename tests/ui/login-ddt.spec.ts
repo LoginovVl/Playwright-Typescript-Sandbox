@@ -1,4 +1,4 @@
-import { test, expect } from '../../fixtures/pomFixture';
+import { test, expect } from '@fixtures/pomFixture';
 import users from '../test-data/login-users.json';
 
 // We must ignore the global auth state for login tests

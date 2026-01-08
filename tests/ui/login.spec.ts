@@ -1,6 +1,6 @@
 // Import 'test' and 'expect' from our custom fixture file, not directly from @playwright/test.
 // This ensures we have access to our pre-instantiated page objects (loginPage, inventoryPage, etc.).
-import { test, expect } from '../../fixtures/pomFixture';
+import { test, expect } from '@fixtures/pomFixture';
 
 // IMPORTANT: Since we have a global setup that logs us in, we need to explicitly tell this test file
 // to ignore that global state, because we want to test the login page itself (which requires being logged out).

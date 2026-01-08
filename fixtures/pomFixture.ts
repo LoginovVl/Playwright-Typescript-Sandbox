@@ -1,9 +1,9 @@
 import { test as base } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { InventoryPage } from '../pages/InventoryPage';
-import { CheckoutPage } from '../pages/CheckoutPage';
-import { BasePage } from '../pages/BasePage';
-import { ApiClient } from '../lib/api/ApiClient';
+import { LoginPage } from '@pages/LoginPage';
+import { InventoryPage } from '@pages/InventoryPage';
+import { CheckoutPage } from '@pages/CheckoutPage';
+import { BasePage } from '@pages/BasePage';
+import { ApiClient } from '@lib/api/ApiClient';
 
 // Declare the types of your fixtures.
 // This tells TypeScript that our custom 'test' function will have these specific page objects available in the arguments.

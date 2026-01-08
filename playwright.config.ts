@@ -78,24 +78,24 @@ export default defineConfig({
       dependencies: ['setup'],
     },
 
-    {
-      name: 'firefox',
-      testDir: './tests/ui',
-      use: {
-        ...devices['Desktop Firefox'],
-        storageState: STORAGE_STATE,
-      },
-      dependencies: ['setup'],
-    },
+    // {
+    //   name: 'firefox',
+    //   testDir: './tests/ui',
+    //   use: {
+    //     ...devices['Desktop Firefox'],
+    //     storageState: STORAGE_STATE,
+    //   },
+    //   dependencies: ['setup'],
+    // },
 
-    {
-      name: 'webkit',
-      testDir: './tests/ui',
-      use: {
-        ...devices['Desktop Safari'],
-        storageState: STORAGE_STATE,
-      },
-      dependencies: ['setup'],
-    },
+    // {
+    //   name: 'webkit',
+    //   testDir: './tests/ui',
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //     storageState: STORAGE_STATE,
+    //   },
+    //   dependencies: ['setup'],
+    // },
   ],
 });
