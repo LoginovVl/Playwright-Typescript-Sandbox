@@ -13,6 +13,7 @@ type Pages = {
   inventoryPage: InventoryPage;
   checkoutPage: CheckoutPage;
   apiClient: ApiClient;
+  consoleLogs: string[];
 };
 
 // Extend the basic Playwright 'test' object to include our custom fixtures.
@@ -47,6 +48,17 @@ export const test = base.extend<Pages>({
   apiClient: async ({ request }, use) => {
     // Instantiate ApiClient with the Playwright request context.
     await use(new ApiClient(request));
+  },
+
+  // Define the 'consoleLogs' fixture.
+  // This fixture captures all console messages from the browser page.
+  consoleLogs: async ({ page }, use) => {
+    const logs: string[] = [];
+    // Listen for console events and push the message text to the logs array.
+    page.on('console', (msg) => logs.push(msg.text()));
+
+    // Provide the logs array to the test.
+    await use(logs);
   },
 });
 

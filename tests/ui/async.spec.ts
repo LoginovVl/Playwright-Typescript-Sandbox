@@ -52,4 +52,15 @@ test.describe('Advanced Async Patterns', () => {
         await expect(page).toHaveURL(/.*inventory.html/, { timeout: 10000 });
     });
 
+    test('should capture console logs', async ({ page, consoleLogs }) => {
+        await page.evaluate(() => {
+            console.log('Hello from the browser!');
+            console.warn('This is a warning');
+        });
+
+        // Verify that our fixture captured the logs
+        expect(consoleLogs).toContain('Hello from the browser!');
+        expect(consoleLogs).toContain('This is a warning');
+    });
+
 });
