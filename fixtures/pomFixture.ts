@@ -1,4 +1,4 @@
-import { test as base } from '@playwright/test';
+import { test as base } from './authFixture';
 import { LoginPage } from '@pages/LoginPage';
 import { InventoryPage } from '@pages/InventoryPage';
 import { CheckoutPage } from '@pages/CheckoutPage';
@@ -16,8 +16,7 @@ type Pages = {
   consoleLogs: string[];
 };
 
-// Extend the basic Playwright 'test' object to include our custom fixtures.
-// This is the core of Dependency Injection in Playwright.
+// Extend the auth-enabled test object to include our Page Object fixtures.
 export const test = base.extend<Pages>({
   // Define the 'basePage' fixture.
   // 'use' is a callback that you call to provide the value to the test.

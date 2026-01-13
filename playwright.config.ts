@@ -8,7 +8,7 @@ import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 // Define the path to the auth state file.
-const STORAGE_STATE = path.join(__dirname, 'playwright/.auth/user.json');
+
 
 // Export the configuration object that Playwright will use to run the tests.
 export default defineConfig({
@@ -51,13 +51,6 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    // Setup project to authenticate before other tests run.
-    {
-      name: 'setup',
-      testDir: './tests/setup',
-      testMatch: /auth\.setup\.ts/,
-    },
-
     // API Project
     {
       name: 'api',
@@ -73,9 +66,7 @@ export default defineConfig({
       testDir: './tests/ui',
       use: {
         ...devices['Desktop Chrome'],
-        storageState: STORAGE_STATE,
       },
-      dependencies: ['setup'],
     },
 
     // {
@@ -83,9 +74,7 @@ export default defineConfig({
     //   testDir: './tests/ui',
     //   use: {
     //     ...devices['Desktop Firefox'],
-    //     storageState: STORAGE_STATE,
     //   },
-    //   dependencies: ['setup'],
     // },
 
     // {
@@ -93,9 +82,7 @@ export default defineConfig({
     //   testDir: './tests/ui',
     //   use: {
     //     ...devices['Desktop Safari'],
-    //     storageState: STORAGE_STATE,
     //   },
-    //   dependencies: ['setup'],
     // },
   ],
 });

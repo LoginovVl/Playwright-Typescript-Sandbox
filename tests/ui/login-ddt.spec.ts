@@ -10,6 +10,20 @@ test.describe('Data-Driven Login Tests', () => {
   const validUsers = users.filter((u) => u.isValid);
   const invalidUsers = users.filter((u) => !u.isValid);
 
+  // Disable worker auth for all tests in this file
+  test.use({ useWorkerAuth: false });
+
+  test.beforeEach(async ({ page, loginPage }) => {
+    // Navigate first to establish domain context
+    await loginPage.navigate('/');
+
+    await page.context().clearCookies();
+    await page.evaluate(() => localStorage.clear());
+
+    // Reload to apply clean state
+    await loginPage.navigate('/');
+  });
+
   for (const user of validUsers) {
     test(`should login successfully for user: ${user.username}`, async ({
       loginPage,

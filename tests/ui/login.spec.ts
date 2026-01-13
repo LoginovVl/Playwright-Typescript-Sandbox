@@ -4,15 +4,23 @@ import { test, expect } from '@fixtures/pomFixture';
 
 // IMPORTANT: Since we have a global setup that logs us in, we need to explicitly tell this test file
 // to ignore that global state, because we want to test the login page itself (which requires being logged out).
-test.use({ storageState: { cookies: [], origins: [] } });
+// Use the new option to disable worker auth for these tests
+test.use({ useWorkerAuth: false });
 
 // test.describe groups related tests together.
 // It helps in organizing the test report and can apply hooks (like beforeEach) to all tests in the block.
 test.describe('Login Functionality', () => {
   // beforeEach is a hook that runs before *every* test in this describe block.
   // We use it here to ensure every test starts from the login page.
-  test.beforeEach(async ({ loginPage }) => {
-    // Navigate to the base URL ('/') before each test.
+  test.beforeEach(async ({ loginPage, page }) => {
+    // 1. Navigate to the app first (so we are on the right domain)
+    await loginPage.navigate('/');
+
+    // 2. Clear cookies/storage to ensure a clean state (logout)
+    await page.context().clearCookies();
+    await page.evaluate(() => localStorage.clear());
+
+    // 3. Reload/Navigate again to reflect the logged-out state
     await loginPage.navigate('/');
   });
 
