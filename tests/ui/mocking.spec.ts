@@ -15,12 +15,16 @@ test.describe('Network Mocking & Resilience', () => {
             });
         });
 
-        // 3. Navigate and Login
+        // 3. Navigate
         await loginPage.navigate('/');
-        await loginPage.login('standard_user', 'secret_sauce');
 
-        // 4. Verify we can detect the 404 failure on the network layer
-        const responseProxy = await page.waitForResponse(resp => resp.url().includes('.jpg') && resp.status() === 404);
+        // 4. Use Promise.all to wait for the response AND trigger the action simultaneously
+        // This is the cleanest pattern to avoid race conditions.
+        const [responseProxy] = await Promise.all([
+            page.waitForResponse(resp => resp.url().includes('.jpg') && resp.status() === 404),
+            loginPage.login('standard_user', 'secret_sauce')
+        ]);
+
         expect(responseProxy.status()).toBe(404);
 
         // Optionally still check for visual broken state if reliable, but network check is deterministic.
