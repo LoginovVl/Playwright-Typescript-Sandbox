@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+import { Header } from './components/Header';
 
 // BasePage serves as a parent class for all other Page Objects.
 // It contains properties and methods shared across the entire application (e.g., the 'page' object itself, navigation).
@@ -6,11 +7,13 @@ export class BasePage {
   // A property to hold the Playwright Page object.
   // 'readonly' ensures it cannot be reassigned after the constructor.
   readonly page: Page;
+  readonly header: Header;
 
   // The constructor receives the Playwright Page instance (passed from the test/fixture)
   // and assigns it to the class property.
   constructor(page: Page) {
     this.page = page;
+    this.header = new Header(page);
   }
 
   // A common method to navigate to a URL.

@@ -19,7 +19,7 @@ test.describe('E2E Checkout Flow', () => {
     await inventoryPage.addItemToCart('Sauce Labs Backpack');
 
     // Navigate to the cart page to begin checkout.
-    await inventoryPage.goToCart();
+    await inventoryPage.header.goToCart();
 
     // -- Step 2: Checkout Process --
     // Click the "Checkout" button on the cart page.
